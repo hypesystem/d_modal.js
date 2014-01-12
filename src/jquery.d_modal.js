@@ -90,6 +90,8 @@
 				d_fadeOut_remove($blackness);
 			});
 		}
+		
+		return $element;
 	}
 
 	var codismiss = {};
@@ -108,12 +110,12 @@
 			.addClass("d-modal")
 			.html(content)
 			.appendTo("body");
-		d_activate_modal($element, settings);
-		return $element;
+		return d_activate_modal($element, settings);
 	}
 	
 	//Extend jQuery prototype
 	$.d_modal = d_make_modal;
+	$.fn.d_modal = function(options) { return d_activate_modal(this,options) };
 
     //Run
     $(document).ready(function() {
