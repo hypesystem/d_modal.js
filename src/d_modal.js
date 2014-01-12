@@ -128,13 +128,13 @@
     $(document).ready(function() {
 
         //Activate all modals defined by class
-        $(".tt-modal").each(function() {
+        $(".d-modal").each(function() {
             d_activate_modal($(this));
         });
 
         //On window resize, make sure that modals are still centered.
         $(window).resize(function() {
-            $(".tt-modal").each(function() {
+            $(".d-modal").each(function() {
                 d_modal_position_x($(this));
             });
         });
