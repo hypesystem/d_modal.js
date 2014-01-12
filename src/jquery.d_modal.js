@@ -47,6 +47,7 @@
 	}
 
 	function d_activate_modal($element, settings) {
+		var settings = default_to(settings,{});
 		//Extend default settings
 		$.extend(settings, default_settings);
 
