@@ -54,6 +54,9 @@
 		if($element.hasClass('d-modal-eternal')) settings.dismissable = false;
 		if($element.hasClass('d-modal-blocking')) settings.blocking = true;
 		
+		//Make absolutely sure that it has the right class
+		$element.addClass("d-modal");
+		
 		//Top most modals should be top-most z-axis, too
 		$element.css('z-index', $element.css('z-index') - modal_id);
 
