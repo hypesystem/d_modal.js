@@ -1,7 +1,6 @@
 (function($) {
 
 	var last_modal_top = 0;
-	var modal_id = 0;
 
 	function default_to(a,val) {
 		return typeof a !== 'undefined' ? a : val;
@@ -44,6 +43,7 @@
 
 	function d_activate_modal($element, settings) {
 		var settings = default_to(settings,{});
+		
 		//Extend default settings
 		settings = $.extend({
 			blocking: false,
@@ -72,23 +72,26 @@
 		
 		//Create dismiss button
 		if(settings.dismissable) {
-			$("<div></div>").addClass("dismiss").prependTo($element)
+			$("<div></div>")
+				.addClass("dismiss")
+				.prependTo($element)
 				.click(function() {
 					$element.trigger("dismiss.d_modal");
 				});
 		}
 
-		//Positioning
+		//Position the modal x and y
 		d_modal_position_y($element);
 		d_modal_position_x($element);
 
-		//Optional lock screen
+		//Optional blocking of screen
 		if(settings.blocking) {
+			//Create screen block
 			var $blackness = $("<div></div>")
 								.addClass("d-modal-blackness")
 								.appendTo("body");
 			
-			//On dismiss modal, dismiss background, too.
+			//On dismiss modal, remove screen block.
 			$element.on("dismiss.d_modal", function() {
 				d_fadeOut_remove($blackness);
 			});
@@ -96,8 +99,6 @@
 		
 		return $element;
 	}
-
-	var codismiss = {};
 
 	//Fade out, remove element on completion
 	function d_fadeOut_remove($element,callback) {
