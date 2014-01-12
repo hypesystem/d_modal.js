@@ -6,15 +6,15 @@
     padding: 17px 17px 19px;
     min-height: 75px;
     box-shadow: 1px 1px 6px rgba(0,0,0,0.5);
-}
-
-.d-modal .dismiss {
-	float: right;
-	cursor: pointer;
-}
-
-.d-modal .dismiss:after {
-	content: '\2716'; /* unicode heavy cross */
+	
+	.dismiss {
+		float: right;
+		cursor: pointer;
+		
+		&:after {
+			content: '\2716'; /* unicode heavy cross */
+		}
+	}
 }
 
 .d-modal-blackness {
