@@ -50,6 +50,7 @@ function default_to(a,val) {
 		if($element.hasClass('d-modal-blocking')) settings.blocking = true;
 		
 		//Extend default settings
+		//TODO: onDismiss? onCreate? (functions for making entry/exit animations)
 		settings = $.extend({
 			blocking: false,
 			dismissable: true
