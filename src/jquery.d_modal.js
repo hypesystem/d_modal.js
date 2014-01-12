@@ -2,10 +2,6 @@
 
 	var last_modal_top = 0;
 	var modal_id = 0;
-	var default_settings = {
-		blocking: false,
-		dismissable: true
-	}
 
 	function default_to(a,val) {
 		return typeof a !== 'undefined' ? a : val;
@@ -49,23 +45,33 @@
 	function d_activate_modal($element, settings) {
 		var settings = default_to(settings,{});
 		//Extend default settings
-		$.extend(settings, default_settings);
+		settings = $.extend({
+			blocking: false,
+			dismissable: true
+		},settings);
 
 		//Get default value overwrite from classes
 		if($element.hasClass('d-modal-eternal')) settings.dismissable = false;
 		if($element.hasClass('d-modal-blocking')) settings.blocking = true;
-
-		//Set id
-		$element.attr("data-d-modal-id",++modal_id);
 		
 		//Top most modals should be top-most z-axis, too
 		$element.css('z-index', $element.css('z-index') - modal_id);
 
-		//Dismiss-cross
+		//Bind modal dismiss listener to remove element and reposition remaining modals
+		$element.on("dismiss.d_modal", function() {
+			d_fadeOut_remove($element, function() {
+				last_modal_top = 0;
+				$(".d-modal").each(function() {
+					d_modal_position_y($(this), true);
+				});
+			});
+		});
+		
+		//Create dismiss button
 		if(settings.dismissable) {
 			$("<div></div>").addClass("dismiss").prependTo($element)
 				.click(function() {
-					d_modal_dismiss($element);
+					$element.trigger("dismiss.d_modal");
 				});
 		}
 
@@ -78,43 +84,25 @@
 			var $blackness = $("<div></div>")
 								.addClass("d-modal-blackness")
 								.appendTo("body");
-			d_modal_codismissed($element,$blackness);
+			
+			//On dismiss modal, dismiss background, too.
+			$element.on("dismiss.d_modal", function() {
+				d_fadeOut_remove($blackness);
+			});
 		}
 	}
 
 	var codismiss = {};
 
-	//TODO: Currently only ONE codismissable is allowed
-	function d_modal_codismissed($element,$co) {
-		codismiss[$element.attr("data-d-modal-id")] = $co;
-	}
-
-	//TODO: Make this a jQuery event ($element.d_dismiss();), then
-	// d_modal_codismissed can be rewritten as an event handler:
-	// $element.d_dismiss(function() { $blackness.remove(); } );
-	function d_modal_dismiss($element) {
-		var element_id = $element.attr("data-d-modal-id");
-		if(element_id in codismiss) {
-			d_fadeOut_remove(codismiss[element_id]);
-			delete codismiss[element_id];
-		}
-		d_fadeOut_remove($element, function() {
-			//Reposition all modals
-			last_modal_top = 0;
-			$(".d-modal").each(function() {
-				d_modal_position_y($(this), true);
-			});
-		});
-
-	}
-
+	//Fade out, remove element on completion
 	function d_fadeOut_remove($element,callback) {
 		$element.fadeOut('fast',function() {
 			$element.remove();
-			callback();
+			if(typeof callback !== 'undefined') callback();
 		});
 	}
 
+	//Create a new modal
 	function d_make_modal(content, settings) {
 		$element = $("<div></div>")
 			.addClass("d-modal")
