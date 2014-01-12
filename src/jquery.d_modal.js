@@ -2,6 +2,10 @@
 
 	var last_modal_top = 0;
 	var modal_id = 0;
+	var default_settings = {
+		blocking: false,
+		dismissable: true
+	}
 
 	function default_to(a,val) {
 		return typeof a !== 'undefined' ? a : val;
@@ -42,15 +46,13 @@
 						 parseInt($element.css('padding-bottom'));
 	}
 
-	function d_activate_modal($element, dismissable, do_lock_screen) {
-		//TODO: Make jQuery function, use settings object
-		//Default value of do_lock_screen
-		do_lock_screen = default_to(do_lock_screen, false);
-		dismissable = default_to(dismissable, true);
+	function d_activate_modal($element, settings) {
+		//Extend default settings
+		$.extend(settings, default_settings);
 
 		//Get default value overwrite from classes
-		if($element.hasClass('d-modal-eternal')) dismissable = false;
-		if($element.hasClass('d-modal-blocking')) do_lock_screen = true;
+		if($element.hasClass('d-modal-eternal')) settings.dismissable = false;
+		if($element.hasClass('d-modal-blocking')) settings.blocking = true;
 
 		//Set id
 		$element.attr("data-d-modal-id",++modal_id);
@@ -59,7 +61,7 @@
 		$element.css('z-index', $element.css('z-index') - modal_id);
 
 		//Dismiss-cross
-		if(dismissable) {
+		if(settings.dismissable) {
 			$("<div></div>").addClass("dismiss").prependTo($element)
 				.click(function() {
 					d_modal_dismiss($element);
@@ -71,7 +73,7 @@
 		d_modal_position_x($element);
 
 		//Optional lock screen
-		if(do_lock_screen) {
+		if(settings.blocking) {
 			var $blackness = $("<div></div>")
 								.addClass("d-modal-blackness")
 								.appendTo("body");
@@ -112,17 +114,17 @@
 		});
 	}
 
-	function d_make_modal(content, dismissable, lock_screen) {
+	function d_make_modal(content, settings) {
 		$element = $("<div></div>")
 			.addClass("d-modal")
 			.html(content)
 			.appendTo("body");
-		d_activate_modal($element, dismissable, lock_screen);
+		d_activate_modal($element, settings);
 		return $element;
 	}
 	
 	//Extend jQuery prototype
-	$.fn.d_modal = d_make_modal;
+	$.d_modal = d_make_modal;
 
     //Run
     $(document).ready(function() {
