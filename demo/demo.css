@@ -17,6 +17,10 @@ body {
 	font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
 }
 
+h1 {
+	border-bottom: 1px solid #95a5a6;
+}
+
 code {
 	font-family: Monaco, Consolas, "Lucida Console", monospace;
 	font-size: 0.8em;
@@ -44,6 +48,22 @@ section:after {
 	color: #bdc3c7;
 }
 
+.showme {
+	margin-bottom: 40px;
+}
+
+.showme-activator {
+	float: right;
+	margin: -40px 10px 0 0;
+	padding: 6px;
+	background: #9b59b6;
+	font-weight: bold;
+	color: white;
+	font-size: 0.8em;
+	border-radius: 0 0 15% 15%;
+	cursor: pointer;
+}
+
 .d-modal {
 	font-size: 1em;
 }
@@ -51,4 +71,8 @@ section:after {
 .d-modal code:not(.code-example) {
 	box-shadow: none;
 	background: rgba(0,0,0,0.2);
+}
+
+.d-modal.success {
+	background: #27ae60;
 }
