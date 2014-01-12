@@ -1,11 +1,11 @@
+function default_to(a,val) {
+	return typeof a !== 'undefined' ? a : val;
+}
+
 (function($) {
 
 	var last_modal_top = 0;
 	var modal_id = 0;
-
-	function default_to(a,val) {
-		return typeof a !== 'undefined' ? a : val;
-	}
 
 	function d_modal_position_x($element, fluid) {
 		fluid = default_to(fluid, false);
@@ -45,15 +45,15 @@
 	function d_activate_modal($element, settings) {
 		var settings = default_to(settings,{});
 		
+		//Get default value overwrite from classes
+		if($element.hasClass('d-modal-eternal')) settings.dismissable = false;
+		if($element.hasClass('d-modal-blocking')) settings.blocking = true;
+		
 		//Extend default settings
 		settings = $.extend({
 			blocking: false,
 			dismissable: true
 		},settings);
-
-		//Get default value overwrite from classes
-		if($element.hasClass('d-modal-eternal')) settings.dismissable = false;
-		if($element.hasClass('d-modal-blocking')) settings.blocking = true;
 		
 		//Make absolutely sure that it has the right class
 		$element.addClass("d-modal");
@@ -101,7 +101,7 @@
 		return $element;
 	}
 
-	//Fade out, remove element on completion
+	//Fade out, remove element on completion, call callback if any
 	function d_fadeOut_remove($element,callback) {
 		$element.fadeOut('fast',function() {
 			$element.remove();
