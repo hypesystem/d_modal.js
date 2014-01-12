@@ -49,11 +49,11 @@
 		dismissable = default_to(dismissable, true);
 
 		//Get default value overwrite from classes
-		if($element.hasClass('tt-modal-eternal')) dismissable = false;
-		if($element.hasClass('tt-modal-locking')) do_lock_screen = true;
+		if($element.hasClass('d-modal-eternal')) dismissable = false;
+		if($element.hasClass('d-modal-blocking')) do_lock_screen = true;
 
 		//Set id
-		$element.attr("data-tt-modal-id",++modal_id);
+		$element.attr("data-d-modal-id",++modal_id);
 		
 		//Top most modals should be top-most z-axis, too
 		$element.css('z-index', $element.css('z-index') - modal_id);
@@ -83,14 +83,14 @@
 
 	//TODO: Currently only ONE codismissable is allowed
 	function d_modal_codismissed($element,$co) {
-		codismiss[$element.attr("data-tt-modal-id")] = $co;
+		codismiss[$element.attr("data-d-modal-id")] = $co;
 	}
 
 	//TODO: Make this a jQuery event ($element.d_dismiss();), then
 	// d_modal_codismissed can be rewritten as an event handler:
 	// $element.d_dismiss(function() { $blackness.remove(); } );
 	function d_modal_dismiss($element) {
-		var element_id = $element.attr("data-tt-modal-id");
+		var element_id = $element.attr("data-d-modal-id");
 		if(element_id in codismiss) {
 			d_fadeOut_remove(codismiss[element_id]);
 			delete codismiss[element_id];
@@ -98,7 +98,7 @@
 		d_fadeOut_remove($element, function() {
 			//Reposition all modals
 			last_modal_top = 0;
-			$(".tt-modal").each(function() {
+			$(".d-modal").each(function() {
 				d_modal_position_y($(this), true);
 			});
 		});
@@ -114,7 +114,7 @@
 
 	function d_make_modal(content, dismissable, lock_screen) {
 		$element = $("<div></div>")
-			.addClass("tt-modal")
+			.addClass("d-modal")
 			.html(content)
 			.appendTo("body");
 		d_activate_modal($element, dismissable, lock_screen);
