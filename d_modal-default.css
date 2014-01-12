@@ -1,0 +1,22 @@
+.d-modal {
+	width: 600px;
+    color: white;
+    background: rgb(80,90,100);
+    font-size: 1.35em;
+    padding: 17px 17px 19px;
+    min-height: 75px;
+    box-shadow: 1px 1px 6px rgba(0,0,0,0.5);
+}
+
+.d-modal .dismiss {
+	float: right;
+	cursor: pointer;
+}
+
+.d-modal .dismiss:after {
+	content: '\2716'; /* unicode heavy cross */
+}
+
+.d-modal-blackness {
+	background: rgba(0,0,0,0.4);
+}
