@@ -73,7 +73,7 @@
 		//Optional lock screen
 		if(do_lock_screen) {
 			var $blackness = $("<div></div>")
-								.addClass("blackness")
+								.addClass("d-modal-blackness")
 								.appendTo("body");
 			d_modal_codismissed($element,$blackness);
 		}
