@@ -1,6 +1,7 @@
 (function($) {
 
 	var last_modal_top = 0;
+	var modal_id = 0;
 
 	function default_to(a,val) {
 		return typeof a !== 'undefined' ? a : val;
@@ -58,7 +59,7 @@
 		$element.addClass("d-modal");
 		
 		//Top most modals should be top-most z-axis, too
-		$element.css('z-index', $element.css('z-index') - modal_id);
+		$element.css('z-index', $element.css('z-index') - (++modal_id));
 
 		//Bind modal dismiss listener to remove element and reposition remaining modals
 		$element.on("dismiss.d_modal", function() {
