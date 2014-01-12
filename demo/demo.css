@@ -76,3 +76,9 @@ section:after {
 .d-modal.success {
 	background: #27ae60;
 }
+
+.warning {
+	margin-left: 60px;
+	padding: 5px 5px 5px 20px;
+	border-left: 5px solid #c0392b;
+}
