@@ -2,7 +2,7 @@
 layout: layout
 ---
 
-<h1>Demo</h1>
+<h1>Get Started</h1>
 
 <!-- CREATING MODALS -->
 <section id="create-modals">
@@ -19,8 +19,8 @@ layout: layout
 	</code>
 	
 	<p>
-		<em>d_modal</em> is a jQuery library with an emphasis on simplicity and ease-of-use. It's easy to
-		create a new modal:
+		<em>d_modal</em> is a jQuery library with an emphasis on simplicity and ease-of-use. All you need is to include jQuery and
+        the <em>d_modal</em> library. It's easy to create a new modal interactively:
 	</p>
 	<code class="code-example showme">
 		$.d_modal("This is a new modal.");
@@ -41,7 +41,7 @@ layout: layout
 	
 	<p>
 		There are a few more options you can use to customize the modal.
-		<a href="/documentation/#param-options">See the full list</a>
+		<a href="../documentation/#options">See the full list</a>
 	</p>
 
 </section>
@@ -55,11 +55,23 @@ layout: layout
 	<code class="code-example showme">
 		$.d_modal("Happy modal").addClass("success");
 	</code>
+    
+    <p id="to-modal">
+        You can also turn existing jQuery objects into modals - both by id (this paragraph has the id
+        <code>#to-modal</code>) or by creating an element with jQuery:
+    </p>
+    <code class="code-example showme">
+        $("#to-modal").d_modal();
+    </code>
+    <code class="code-example">
+        $("&lt;div&gt;&lt;/div&gt;").text("Hello, world").d_modal();
+    </code>
 	
 	<div class="warning">
-		Using <code>text()</code> and <code>html()</code> will overwrite everything inside the modal,
-		and may break functionality. You should instead use <code>d_modal.text()</code> and
-		<code>d_modal.html()</code>. <a href="/documentation/#special-cases">Read more</a>
+		There are some special cases that you should be aware of, when using <code>text()</code>
+        and <code>html()</code>, as well as functions to hide elements. To hide a modal, you should
+        trigger it's <code>dismiss.d_modal</code> event.
+        <a href="../documentation/#special-cases">Read more</a>
 	</div>
 
 </section>
@@ -70,8 +82,25 @@ layout: layout
 	<p>
 		On the topic of customizations... it's easy to change the look of the modal, and you can do
 		this however you want. A sample stylesheet
-		(<a href="/src/d_modal-default.less"><code>d_modal-default.less</code></a>) is included
+		(<a href="../src/d_modal-default.less">d_modal-default.less</a>) is included
 		so you know where to start.
 	</p>
+    <p>
+        The source files for the project are:
+        <ul>
+            <li>
+                <a href="../src/jquery.d_modal.js" target="_blank">jquery.d_modal.js</a> &mdash; the
+                jQuery library code.
+            </li>
+            <li>
+                <a href="../src/d_modal.less" target="_blank">d_modal.less</a> &mdash; required stylesheet
+                for the library (for setting styles more quickly than with pure jQuery).
+            </li>
+            <li>
+                <a href="../src/d_modal-default.less" target="_blank">d_modal-default.less</a> &mdash;
+                Default stylesheet for the modal - should be used as an inspiration for your own design.
+            </li>
+        </ul>
+    </p>
 
 </section>
