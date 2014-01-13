@@ -7,39 +7,26 @@ function default_to(a,val) {
 	var last_modal_top = 0;
 	var modal_id = 0;
 
-	function d_modal_position_x($element, fluid) {
-		fluid = default_to(fluid, false);
-		
-		if(fluid) {
-			$element.animate({
-				'left': ($(window).width() / 2) -
-						($element.width() / 2) -
-						parseInt($element.css('padding-left'))
-			}, 'fast');
-		}
-		else {
-			$element.css('left',
-				($(window).width() / 2) -
-				($element.width() / 2) -
-				parseInt($element.css('padding-left')));
-		}
+	function d_modal_position_x($element, duration) {
+		duration = default_to(duration, 0);
+
+        $element.animate({
+            'left': ($(window).width() / 2) -
+                    ($element.width() / 2) -
+                    parseInt($element.css('padding-left'))
+        }, 0);
 	}
 
-	function d_modal_position_y($element, fluid) {
-		fluid = default_to(fluid,false);
+	function d_modal_position_y($element, duration) {
+		duration = default_to(duration, 0);
 
-		if(fluid) {
-			$element.animate({
-				'top': last_modal_top
-			}, 'fast');
-		}
-		else {
-			$element.css('top',last_modal_top+"px");
-		}
-		last_modal_top = last_modal_top +
-						 $element.height() +
-						 parseInt($element.css('padding-top')) +
-						 parseInt($element.css('padding-bottom'));
+        $element.animate({
+            'top': last_modal_top
+        }, duration);
+		
+		last_modal_top += $element.height() +
+						  parseInt($element.css('padding-top')) +
+						  parseInt($element.css('padding-bottom'));
 	}
 
 	function d_activate_modal($element, settings) {
@@ -67,7 +54,7 @@ function default_to(a,val) {
 			d_fadeOut_remove($element, function() {
 				last_modal_top = 0;
 				$(".d-modal").each(function() {
-					d_modal_position_y($(this), true);
+					d_modal_position_y($(this), 'fast');
 				});
 			});
 		});
