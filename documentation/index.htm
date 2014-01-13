@@ -18,18 +18,30 @@ layout: layout
 		2. Turn an existing DOM element (<code>element</code>) into a modal:
 	</p>
 	<code class="code-example">
-		$(<a href="#element">element</a>).d_modal([<a href="#options">options</a>]);
+		<a href="#$element">$element</a>.d_modal([<a href="#options">options</a>]);
 	</code>
+    
+    <p>
+        3. Dismiss a previously created modal:
+    </p>
+    <code class="code-example">
+        <a href="#$modal">$modal</a>.trigger("dismiss.d_modal");
+    </code>
 
 	<h3 id="content">content</h3>
 	<p>
 		Any valid html. Will be contained in the modal that is created.
 	</p>
 
-	<h3 id="element">element</h3>
+	<h3 id="$element">$element</h3>
 	<p>
-		Any valid DOM element. Will be turned into a modal (the class <code>.d-modal</code> will be added to it.
+		A jQuery object. Will be turned into a modal (the class <code>.d-modal</code> will be added to it).
 	</p>
+    
+    <h3 id="$modal">$modal</h3>
+    <p>
+        A reference to a previously created modal.
+    </p>
 
 	<h3 id="options">options</h3>
 	<ul>
@@ -54,10 +66,14 @@ layout: layout
 	<h3>Dismissal of Modal</h3>
 	<p>
 		<strong>Always</strong> dismiss the modal by triggering the <code>dismiss.d_modal</code> event, as such:
-		<code class="code-example">
-			$(".d-modal").trigger("dismiss.d_modal");
-		</code>
-	</p>
+    </p>
+    <code class="code-example">
+        $(".d-modal").trigger("dismiss.d_modal");
+    </code>
+    <p>
+        The normal jQuery calls (<code>hide()</code>, <code>remove()</code>, <code>fadeOut()</code>, <code>slideUp()</code>,
+        etc.) may have erratic behaviour.
+    </p>
 	
 	<h3>Setting text and html content</h3>
 	<p>
