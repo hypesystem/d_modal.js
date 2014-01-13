@@ -14,7 +14,7 @@ function default_to(a,val) {
             'left': ($(window).width() / 2) -
                     ($element.width() / 2) -
                     parseInt($element.css('padding-left'))
-        }, 0);
+        }, duration);
 	}
 
 	function d_modal_position_y($element, duration) {
