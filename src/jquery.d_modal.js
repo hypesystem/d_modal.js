@@ -43,7 +43,7 @@ function default_to(a,val) {
 			dismissable: true
 		},settings);
 		
-		//Make absolutely sure that it has the right class
+		//Add d-modal class to element
 		$element.addClass("d-modal");
 		
 		//Top most modals should be top-most z-axis, too
@@ -106,7 +106,6 @@ function default_to(a,val) {
 	//Create a new modal
 	function d_make_modal(content, settings) {
 		$element = $("<div></div>")
-			.addClass("d-modal")
 			.html(content)
 			.appendTo("body");
 		return d_activate_modal($element, settings);
