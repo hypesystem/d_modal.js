@@ -44,7 +44,7 @@ function default_to(a,val) {
             parent: "body"
 		},settings);
 		
-		//Make absolutely sure that it has the right class
+		//Add d-modal class to element
 		$element.addClass("d-modal");
 		
 		//Top most modals should be top-most z-axis, too
@@ -60,8 +60,8 @@ function default_to(a,val) {
 			});
 		});
 		
-		//Create dismiss button
 		if(settings.dismissable) {
+            //Create dismiss button
 			$("<div></div>")
 				.addClass("dismiss")
 				.prependTo($element)
@@ -69,6 +69,10 @@ function default_to(a,val) {
 					$element.trigger("dismiss.d_modal");
 				});
 		}
+        else {
+            //Set modal class: eternal
+            $element.addClass("d-modal-eternal");
+        }
 
 		//Position the modal x and y
 		d_modal_position_y($element);
@@ -76,6 +80,8 @@ function default_to(a,val) {
 
 		//Optional blocking of screen
 		if(settings.blocking) {
+            //Set modal class: blocking
+            $element.addClass("d-modal-blocking");
 			//Create screen block
 			var $blackness = $("<div></div>")
 								.addClass("d-modal-blackness")
@@ -105,7 +111,6 @@ function default_to(a,val) {
         }, settings);
     
 		$element = $("<div></div>")
-			.addClass("d-modal")
 			.html(content)
 			.appendTo(settings.parent);
 		return d_activate_modal($element, settings);
