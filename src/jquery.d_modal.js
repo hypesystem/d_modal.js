@@ -40,7 +40,8 @@ function default_to(a,val) {
 		//TODO: onDismiss? onCreate? (functions for making entry/exit animations)
 		settings = $.extend({
 			blocking: false,
-			dismissable: true
+			dismissable: true,
+            parent: "body"
 		},settings);
 		
 		//Add d-modal class to element
@@ -84,7 +85,7 @@ function default_to(a,val) {
 			//Create screen block
 			var $blackness = $("<div></div>")
 								.addClass("d-modal-blackness")
-								.appendTo("body");
+								.appendTo(settings.parent);
 			
 			//On dismiss modal, remove screen block.
 			$element.on("dismiss.d_modal", function() {
