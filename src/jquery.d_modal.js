@@ -40,8 +40,7 @@ function default_to(a,val) {
 		//TODO: onDismiss? onCreate? (functions for making entry/exit animations)
 		settings = $.extend({
 			blocking: false,
-			dismissable: true,
-            parent: "body"
+			dismissable: true
 		},settings);
 		
 		//Add d-modal class to element
