@@ -40,7 +40,8 @@ function default_to(a,val) {
 		//TODO: onDismiss? onCreate? (functions for making entry/exit animations)
 		settings = $.extend({
 			blocking: false,
-			dismissable: true
+			dismissable: true,
+            parent: "body"
 		},settings);
 		
 		//Make absolutely sure that it has the right class
@@ -99,10 +100,14 @@ function default_to(a,val) {
 
 	//Create a new modal
 	function d_make_modal(content, settings) {
+        settings = $.extend({
+            parent: "body"
+        }, settings);
+    
 		$element = $("<div></div>")
 			.addClass("d-modal")
 			.html(content)
-			.appendTo("body");
+			.appendTo(settings.parent);
 		return d_activate_modal($element, settings);
 	}
 	
