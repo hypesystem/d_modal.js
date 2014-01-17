@@ -52,7 +52,7 @@ function default_to(a,val) {
 
 		//Bind modal dismiss listener to remove element and reposition remaining modals
 		$element.on("dismiss.d_modal", function() {
-			d_fadeOut_remove($element, function() {
+			d_fadeOut_remove($element, "fast", function() {
 				last_modal_top = 0;
 				$(".d-modal").each(function() {
 					d_modal_position_y($(this), 'fast');
@@ -89,7 +89,7 @@ function default_to(a,val) {
 			
 			//On dismiss modal, remove screen block.
 			$element.on("dismiss.d_modal", function() {
-				d_fadeOut_remove($blackness);
+				d_fadeOut_remove($blackness, "fast");
 			});
 		}
 		
@@ -97,8 +97,8 @@ function default_to(a,val) {
 	}
 
 	//Fade out, remove element on completion, call callback if any
-	function d_fadeOut_remove($element,callback) {
-		$element.fadeOut('fast',function() {
+	function d_fadeOut_remove($element,speed,callback) {
+		$element.fadeTo(speed,0,function() {
 			$element.remove();
 			if(typeof callback !== 'undefined') callback();
 		});
