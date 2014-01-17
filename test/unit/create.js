@@ -34,7 +34,16 @@ QUnit.test("Creation of blocking modal", function(assert) {
 });
 
 QUnit.test("Creation of blocking modal from existing hidden", function(assert) {
-  expect(1);
+  expect(2);
+  $('<div style="display:hidden;">HellO</div>')
+    .appendTo("#qunit-fixture")
+    .d_modal({
+        parent: "#qunit-fixture",
+        blocking: true
+    });
+  var $blackness = $("#qunit-fixture").find('.d-modal-blackness');
+  equal($blackness.length,1, "Exactly one blackenss exists");
+  ok($blackness.is(":hidden"), "Blackness is hidden with modal");
 });
 
 QUnit.test("Creation of two modals", function(assert) {
