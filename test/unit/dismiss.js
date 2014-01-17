@@ -21,3 +21,7 @@ QUnit.test("Three modals, dismiss middle", function(assert) {
 QUnit.test("Dismiss eternal modal with event", function(assert) {
   expect(1);
 });
+
+QUnit.test("Dismiss hidden modal with event (no event)", function(assert) {
+  expect(1);
+});

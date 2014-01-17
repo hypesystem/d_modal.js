@@ -33,6 +33,10 @@ QUnit.test("Creation of blocking modal", function(assert) {
   expect(1);
 });
 
+QUnit.test("Creation of blocking modal from existing hidden", function(assert) {
+  expect(1);
+});
+
 QUnit.test("Creation of two modals", function(assert) {
   expect(2);
   $modal1 = $.d_modal("Hello, World", {parent: "#qunit-fixture" });
