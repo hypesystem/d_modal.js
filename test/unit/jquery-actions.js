@@ -1,3 +1,5 @@
+modal("use jQuery built-in actions");
+
 QUnit.test("jQuery hide modal", function(assert) {
   expect(1);
   var $modal = $.d_modal("Hello, World.", { parent: "#qunit-fixture" });

@@ -1,3 +1,5 @@
+module("dismiss modal");
+
 QUnit.test("Click Dismiss Button", function(assert) {
   expect(1);
 });
