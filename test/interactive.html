@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>interactive test</title>
+        <meta charset="utf8">
+        <link rel="stylesheet/less" type="text/css" href="../src/d_modal.less">
+		<link rel="stylesheet/less" type="text/css" href="../src/d_modal-default.less">
+        <script src="http://resources.deranged.dk/lib/less/1.6.1.min.js"></script>
+    </head>
+    <body>
+        <div class="d-modal" id="modal-0">Hello, World</div>
+        <button id="trigger-modal">Make modal</button>
+        <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+        <script src="../src/jquery.showandtell.1.1.0.min.js"></script>
+        <script src="../src/jquery.d_modal.js"></script>
+        <script>
+            var id = 0;
+            $("#trigger-modal").click(function() { $.d_modal("New modal").attr("id", "modal-"+(++id)); });
+        </script>
+    </body>
+</html>

@@ -19,7 +19,7 @@ function default_to(a,val) {
 
 	function d_modal_position_y($element, duration) {
 		duration = default_to(duration, 0);
-
+        
         $element.animate({
             'top': last_modal_top
         }, duration);
@@ -28,6 +28,13 @@ function default_to(a,val) {
 						  parseInt($element.css('padding-top')) +
 						  parseInt($element.css('padding-bottom'));
 	}
+    
+    function d_modal_reposition_all() {
+        last_modal_top = 0;
+        $(".d-modal:visible").each(function() {
+            d_modal_position_y($(this), 'fast');
+        });
+    }
 
 	function d_activate_modal($element, settings) {
 		var settings = default_to(settings,{});
@@ -51,14 +58,21 @@ function default_to(a,val) {
 		$element.css('z-index', $element.css('z-index') - (++modal_id));
 
 		//Bind modal dismiss listener to remove element and reposition remaining modals
-		$element.on("dismiss.d_modal", function() {
-			d_fadeOut_remove($element, "fast", function() {
-				last_modal_top = 0;
-				$(".d-modal").each(function() {
-					d_modal_position_y($(this), 'fast');
-				});
-			});
+		$element.bind("dismiss.d_modal", function() {
+			$element.fadeOut();
 		});
+        
+        //Bind modal hide listener to reposition all modals
+        $element.bind("hide.d_modal", function() {
+            d_modal_reposition_all();
+        });
+        
+        //Bind remove listener to reposition
+        $element.bind("remove.d_modal", function() {
+            //Remove from set that is being repositioned, then reposition
+            $(this).removeClass("d-modal");
+            d_modal_reposition_all();
+        });
 		
 		if(settings.dismissable) {
             //Create dismiss button
@@ -87,21 +101,21 @@ function default_to(a,val) {
 								.addClass("d-modal-blackness")
 								.appendTo(settings.parent);
 			
-			//On dismiss modal, remove screen block.
-			$element.on("dismiss.d_modal", function() {
-				d_fadeOut_remove($blackness, "fast");
+			//Bind listeners on modal to echo onto blackness
+			$element.bind("hide.d_modal", function() {
+				$blackness.hide();
 			});
+            
+            $element.bind("remove.d_modal", function() {
+                $blackness.remove();
+            });
+            
+            $element.bind("show.d_modal", function() {
+                $blackness.show();
+            });
 		}
 		
 		return $element;
-	}
-
-	//Fade out, remove element on completion, call callback if any
-	function d_fadeOut_remove($element,speed,callback) {
-		$element.fadeTo(speed,0,function() {
-			$element.remove();
-			if(typeof callback !== 'undefined') callback();
-		});
 	}
 
 	//Create a new modal
